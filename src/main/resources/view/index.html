@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Плавающие заголовки | Демо 1</title>
+		<link rel="stylesheet" type="text/css" href="view/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="view/css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="view/css/component.css" />
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<script src="view/js/main.js">
+		</script>
+		<script src="view/js/jquery-3.1.1.min.js"></script>
+	</head>
+	<body>
+	<div id="post" style="position: fixed; left:0; width: 20%; height: 100%; background: #eeeeee; box-shadow: 1px 0 0 0 #7c8d87">
+		<form id="formsave" style="position: fixed; padding-left: 1%; padding-top: 11%">
+			<p>Номер(Только для обновления)</p>
+			<select id="cid" style="width: 335px">
+				<option value=""><p style="text-align: center">Текст</p></option>
+				<option>2</option>
+				<option>3</option>
+			</select>
+			<p>Имя:</p>
+			<input id="inputName" type="text" size="40">
+			<p>Описание:</p>
+			<input id="inputDescription" type="text" size="40">
+			<p>Телефонный номер: </p>
+			<input id="inputPhone" type="text" size="40">
+			<br/><br/>
+			<button type="submit" onclick="createContact()">Создать</button>
+			<button type="submit" onclick="updateContact()">Обновить</button>
+		</form>
+	</div>
+		<div class="container">
+			<header style="padding-left: 20%">
+				<h1>Менеджер контактов</h1>
+				<nav class="codrops-demos">
+					<a class="current-demo" href="index.html" title="Basic Usage">Контакты</a>
+					<a href="view/index2.html" title="Biaxial Headers">Личный кабинет</a>
+					<a href="view/index3.html" title="Wide Tables">Сервисы</a>
+				</nav>
+			</header>
+			<div class="component" style="padding-left: 18%">
+				<table id="table1">
+					<thead>
+						<tr>
+							<th>Номер</th>
+							<th>Имя</th>
+							<th>Описание</th>
+							<th>Мобильный</th>
+							<th>Удаление</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+				<button type="button" onclick="test(4,5)">Выполнить функцию</button>
+			</div>
+		</div>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+		<script src="view/js/jquery.stickyheader.js"></script>
+	<script type="text/javascript">getAllContactForUser()</script>
+	</body>
+</html>
