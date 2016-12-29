@@ -1,14 +1,17 @@
 package com.example.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Role implements Serializable{
+public class Role implements Serializable, GrantedAuthority{
 
     public static final long serialVersionUID = 2016414618237L;
 
@@ -16,9 +19,19 @@ public class Role implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String denomination;
+    private String role;
 
-    private int legalLevel;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public Long getId() {
         return id;
@@ -28,53 +41,21 @@ public class Role implements Serializable{
         this.id = id;
     }
 
-    public String getDenomination() {
-        return denomination;
+    public String getRole() {
+        return role;
     }
 
-    public void setDenomination(String denomination) {
-        this.denomination = denomination;
-    }
-
-    public int getLegalLevel() {
-        return legalLevel;
-    }
-
-    public void setLegalLevel(int legalLevel) {
-        this.legalLevel = legalLevel;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Role role = (Role) o;
-
-        if (legalLevel != role.legalLevel) return false;
-        if (!id.equals(role.id)) return false;
-        return denomination.equals(role.denomination);
-
-    }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + denomination.hashCode();
-        result = 31 * result + legalLevel;
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", denomination='" + denomination + '\'' +
-                ", legalLevel=" + legalLevel +
-                '}';
+    public String getAuthority() {
+        return getRole();
     }
 }

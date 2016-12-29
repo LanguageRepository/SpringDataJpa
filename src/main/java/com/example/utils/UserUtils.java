@@ -19,8 +19,8 @@ public class UserUtils {
         UserDto dto = new UserDto();
         dto.setId(user.getId());
         dto.setName(user.getName());
-        dto.setNickName(user.getNickname());
-        dto.setRoleId(user.getRole().getId());
+        dto.setUsername(user.getUsername());
+        dto.setRoles(user.getRoles());
         return dto;
     }
 
@@ -28,8 +28,8 @@ public class UserUtils {
         User user = new User();
         user.setId(dto.getId());
         user.setName(dto.getName());
-        user.setNickname(dto.getNickName());
-        user.setRole(roleRepository.getOne(dto.getRoleId()));
+        user.setUsername(dto.getUsername());
+        user.setRoles(dto.getRoles());
         return user;
     }
 
@@ -39,8 +39,8 @@ public class UserUtils {
             UserDto userDto = new UserDto();
             userDto.setId(entities.get(i).getId());
             userDto.setName(entities.get(i).getName());
-            userDto.setNickName(entities.get(i).getNickname());
-            userDto.setRoleId(entities.get(i).getRole().getId());
+            userDto.setUsername(entities.get(i).getUsername());
+            userDto.setRoles(entities.get(i).getRoles());
             dtos.add(userDto);
         }
         return dtos;

@@ -1,8 +1,12 @@
 package com.example.config;
 
+import com.example.SpringDataJpaApplication;
+import com.example.utils.MySQLUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -23,7 +27,12 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    public InternalResourceViewResolver getViewResolver() {
+    public UserDetailsService getUserDetailsService() {
+        return new MySQLUserDetailsService();
+    }
+
+    @Bean
+    public ViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setPrefix("/view/");
         viewResolver.setSuffix(".html");

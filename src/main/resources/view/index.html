@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 	<head>
 		<meta charset="UTF-8" />
 		<title>Плавающие заголовки | Демо 1</title>
@@ -15,23 +17,23 @@
 	</head>
 	<body>
 	<div id="post" style="position: fixed; left:0; width: 20%; height: 100%; background: #eeeeee; box-shadow: 1px 0 0 0 #7c8d87">
-		<form id="formsave" style="position: fixed; padding-left: 1%; padding-top: 11%">
+		<div id="formsave" style="position: fixed; padding-left: 1%; padding-top: 11%">
 			<p>Номер(Только для обновления)</p>
 			<select id="cid" style="width: 335px">
 				<option value=""><p style="text-align: center">Текст</p></option>
 				<option>2</option>
 				<option>3</option>
-			</select>
-			<p>Имя:</p>
-			<input id="inputName" type="text" size="40">
-			<p>Описание:</p>
-			<input id="inputDescription" type="text" size="40">
-			<p>Телефонный номер: </p>
-			<input id="inputPhone" type="text" size="40">
-			<br/><br/>
-			<button type="submit" onclick="createContact()">Создать</button>
+			</select><br/>
+			<label>Введите имя: <br/><input id="inputName" type="text" size="40"/></label><br/>
+			<label>Введите описание: <br/><input id="inputDescription" type="text" size="40"/></label><br/>
+			<label>Телефонный номер: <br/><input id="inputPhone" type="text" size="40"/></label><br/>
+			<br/>
+			<button type="submit" th:http-equiv="re" onclick="createContact()">Создать</button>
 			<button type="submit" onclick="updateContact()">Обновить</button>
-		</form>
+			<form th:action="@{/logout}" method="post">
+				<button type="submit">Выйти</button>
+			</form>
+		</div>
 	</div>
 		<div class="container">
 			<header style="padding-left: 20%">

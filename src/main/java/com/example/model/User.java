@@ -1,12 +1,14 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "users")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User implements Serializable {
 
@@ -18,10 +20,17 @@ public class User implements Serializable {
 
     private String name;
 
-    private String nickname;
+    @Column(name = "username")
+    private String username;
 
-    @ManyToOne
-    private Role role;
+    @Column(name = "password")
+    private String password;
+
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -39,20 +48,28 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Role getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -64,8 +81,8 @@ public class User implements Serializable {
 
         if (!id.equals(user.id)) return false;
         if (!name.equals(user.name)) return false;
-        if (!nickname.equals(user.nickname)) return false;
-        return role.equals(user.role);
+        if (!username.equals(user.username)) return false;
+        return roles.equals(user.roles);
 
     }
 
@@ -73,8 +90,8 @@ public class User implements Serializable {
     public int hashCode() {
         int result = id.hashCode();
         result = 31 * result + name.hashCode();
-        result = 31 * result + nickname.hashCode();
-        result = 31 * result + role.hashCode();
+        result = 31 * result + username.hashCode();
+        result = 31 * result + roles.hashCode();
         return result;
     }
 
@@ -83,8 +100,8 @@ public class User implements Serializable {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", role=" + role +
+                ", username='" + username + '\'' +
+                ", roles=" + roles +
                 '}';
     }
 }

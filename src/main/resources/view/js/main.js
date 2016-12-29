@@ -52,9 +52,9 @@ function createContact() {
         data: jsonView,
         dataType: 'json',
         timeout: 600000,
-        success: function () {
-            document.location.href = 'http://localhost:8080/home?1';
-        }
+        success: setTimeout(function () {
+            document.location.href = 'http://localhost:8080/';
+        }, 2000)
     })
 }
 function updateContact() {
@@ -77,7 +77,7 @@ function updateContact() {
         dataType: 'json',
         timeout: 600000,
         success: setTimeout(function () {
-            location.reload();
+            document.location.href = 'http://localhost:8080/';
         }, 2000)
     })
 }
@@ -86,7 +86,7 @@ function deleteContact(id) {
         url: "/contacts/del/" + id,
         type: "DELETE",
         success: setTimeout(function () {
-            document.location.href = 'http://localhost:8080/home';
+            document.location.href = 'http://localhost:8080/';
         }, 1000)
     })
 }

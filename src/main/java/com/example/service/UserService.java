@@ -25,9 +25,9 @@ public class UserService {
     private RoleRepository roleRepository;
 
     @Transactional
-    public UserDto getUser(Long id) {
+    public User getUser(Long id) {
         User user = userRepository.getOne(id);
-        return userUtils.convertEntityToDto(user);
+        return userRepository.getOne(id);
     }
 
     @Transactional
@@ -43,11 +43,6 @@ public class UserService {
     @Transactional
     public void deleteUser(Long id) {
         userRepository.delete(id);
-    }
-
-    @Transactional
-    public List<UserDto> getUserByRole(Long id) {
-        return userUtils.convertEntitiesToDtos(userRepository.findByRole(roleRepository.getOne(id)));
     }
 
 }

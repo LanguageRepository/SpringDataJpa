@@ -1,19 +1,23 @@
 package com.example.dto;
 
+import com.example.model.Role;
+
+import java.util.Set;
+
 public class UserDto {
 
     private Long id;
     private String name;
-    private String nickName;
-    private Long roleId;
+    private String username;
+    private Set<Role> roles;
 
     @Override
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", nickName='" + nickName + '\'' +
-                ", roleId=" + roleId +
+                ", username='" + username + '\'' +
+                ", roleId=" + roles +
                 '}';
     }
 
@@ -33,19 +37,19 @@ public class UserDto {
         this.name = name;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

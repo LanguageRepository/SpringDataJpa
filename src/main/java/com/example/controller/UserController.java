@@ -5,19 +5,21 @@ import com.example.model.User;
 import com.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/customers")
+@PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @RequestMapping(value = "/get/{userId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto getUser(@PathVariable(value = "userId") Long userId) {
+    public User getUser(@PathVariable(value = "userId") Long userId) {
         return userService.getUser(userId);
     }
 
@@ -34,11 +36,6 @@ public class UserController {
     @RequestMapping(value = "/del/{userId}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable Long userId) {
         userService.deleteUser(userId);
-    }
-
-    @RequestMapping(value = "/getByRole/{roleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> getUserByRoleId(@PathVariable(value = "roleId") Long roleId) {
-        return userService.getUserByRole(roleId);
     }
 
 }
